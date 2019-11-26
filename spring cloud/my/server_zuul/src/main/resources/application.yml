@@ -1,0 +1,51 @@
+server:
+  port: 9005
+spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  application:
+    name: server-zuul
+#redis配置
+#Redis服务器地址
+  redis:
+    host: 127.0.0.1
+    #Redis服务器连接端口
+    port: 6379
+    #Redis数据库索引（默认为0）
+    database: 0
+    #连接超时时间（毫秒）
+    timeout: 5000
+    #连接池最大连接数（使用负值表示没有限制）
+    jedis:
+      pool:
+        max-active: 50
+        #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 3000
+        #连接池中的最大空闲连接
+        max-idle: 20
+        #连接池中的最小空闲连接
+        min-idle: 2
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9001/eureka/, http://localhost:9000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+zuul:
+  routes:
+    movies:
+      serviceId: server-movies
+      path: /movies/**
+    users:
+      serviceId: server-users
+      path: /users/**
+
+
+  #需要忽略的头部信息，不在传播到其他服务
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+
+logging:
+  config: classpath:log4j2.yml

@@ -1,0 +1,80 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/movies/movies",
+		    "style" : {
+				"navigationBarBackgroundColor":"#ff5c7c",
+				"navigationBarTitleText":"视频首页",
+				"enablePullDownRefresh":true,
+				 "app-plus":{
+					"pullToRefresh": {
+					                        "support": true,
+					                        "color": "#ff5c7c",
+					                        "style": "default",
+											"height":"90%",
+											"offset":"130%",
+											"range":"90%"
+					}
+				} 
+			}
+		},
+		{
+		    "path" : "pages/shop/shop",
+		    "style" : {
+				"navigationBarBackgroundColor":"#24ace5",
+				"navigationBarTitleText":"我的商城"
+			}
+		},
+		{
+		    "path" : "pages/user/user",
+		    "style" : {
+				"navigationBarBackgroundColor":"#336b98",
+				"navigationBarTitleText":"我的信息"
+			}
+		},
+		{
+            "path" : "pages/login/login",
+            "style" : {
+				"navigationBarBackgroundColor":"#000000",
+				"navigationBarTitleText":"登录我的应用"
+			}
+        },
+		{
+            "path" : "pages/movies/movieup",
+            "style" : {
+				"navigationBarBackgroundColor":"#9C26B0",
+				"navigationBarTitleText":"上传视频"
+			}
+        },
+		{
+            "path" : "pages/movies/watchtv",
+            "style" : {
+				"navigationBarBackgroundColor":"#000000",
+				"navigationBarTitleText":"在线观看"
+			}
+        }
+    ],
+	"tabBar": {
+	        "color": "black",
+	        "selectedColor": "#39cffc",
+	        "borderStyle": "black",
+	        "backgroundColor": "#e1e1e1",
+	        "list": [{
+	                "pagePath": "pages/movies/movies",
+	                "iconPath": "static/icon/movies.ico",
+	                "selectedIconPath": "static/icon/smovies.ico",
+	                "text": "视频首页"
+	            }, {
+	                "pagePath": "pages/shop/shop",
+	                "iconPath": "static/icon/shop.ico",
+	                "selectedIconPath": "static/icon/sshop.ico",
+	                "text": "我的商城"
+	            },{
+	                "pagePath": "pages/user/user",
+	                "iconPath": "static/icon/user.ico",
+	                "selectedIconPath": "static/icon/suer.ico",
+	                "text": "我的信息"
+	            }
+	        ]
+	    }
+}

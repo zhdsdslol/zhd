@@ -1,0 +1,13 @@
+server:
+  port: 9001
+
+eureka:
+  server:
+    enable-self-preservation: true
+  instance:
+    hostname: server2
+  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka/
