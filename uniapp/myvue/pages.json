@@ -52,7 +52,30 @@
 				"navigationBarBackgroundColor":"#000000",
 				"navigationBarTitleText":"在线观看"
 			}
-        }
+        },
+		{
+		    "path" : "pages/user/addqqb",
+		    "style" : {
+				"navigationBarBackgroundColor":"#0081FF",
+				"navigationBarTitleText":"球球币收益记录"
+			}
+		},
+		{
+		    "path" : "pages/user/orders",
+		    "style" : {
+				"navigationBarBackgroundColor":"#f3f3f3",
+				"navigationBarTitleText":"订单记录",
+				"navigationBarTextStyle":"black"
+			}
+		},
+		{
+		    "path" : "pages/shop/addshop",
+		    "style" : {
+				"navigationBarBackgroundColor":"#ED1C24",
+				"navigationBarTitleText":"添加商品",
+				"navigationBarTextStyle":"black"
+			}
+		}
     ],
 	"tabBar": {
 	        "color": "black",

@@ -51,9 +51,10 @@ public class ZuulFilterExt extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        //不拦截登录页和视频主页
+        //不拦截登录页和视频主页等
         if("/users/user/userlogin".equals(request.getServletPath())||"/movies/movie/querymovie".equals(request.getServletPath())
-            ||"/movies/movie/getmovie".equals(request.getServletPath())||request.getServletPath().endsWith(".mp4")||request.getServletPath().endsWith(".jpg")){
+            ||"/movies/movie/getmovie".equals(request.getServletPath())||request.getServletPath().endsWith(".mp4")||request.getServletPath().endsWith(".jpg")
+            ||"/shops/shop/findall".equals(request.getServletPath())){
             return null;
         }
 

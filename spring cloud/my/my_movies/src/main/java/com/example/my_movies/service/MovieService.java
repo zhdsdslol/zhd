@@ -1,16 +1,18 @@
 package com.example.my_movies.service;
 
 import com.example.my_movies.dao.movieDao;
+import com.example.my_movies.dao.dianzanDao;
+import com.example.my_movies.models.DianzanEntity;
 import com.example.my_movies.models.MoviesEntity;
 import com.example.my_movies.models.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class MovieService implements MovieServiceImpl {
 
     @Autowired
     private movieDao movieDao;
+    @Autowired
+    private dianzanDao dianzanDao;
 
     @Override
     public boolean AddMv(MoviesEntity movie) throws Exception{
@@ -70,5 +74,20 @@ public class MovieService implements MovieServiceImpl {
     @Override
     public MoviesEntity getmovie(Integer id) {
         return movieDao.getOne(id);
+    }
+
+    @Override
+    @Transactional
+    public boolean dianzan(Integer userid,Integer movieid, String movieids) {
+        int updatadianzan = movieDao.updatadianzan(movieid);
+        int aa = dianzanDao.update(movieids,userid);
+        System.out.println(updatadianzan);
+        System.out.println(aa);
+        return true;
+    }
+
+    @Override
+    public DianzanEntity finddianzan(Integer userid) {
+            return dianzanDao.getOne(userid);
     }
 }

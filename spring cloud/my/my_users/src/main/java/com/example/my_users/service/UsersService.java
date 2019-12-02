@@ -6,8 +6,10 @@ import com.example.my_users.models.AddqqbEntity;
 import com.example.my_users.models.UsersEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 @Service
@@ -26,8 +28,9 @@ public class UsersService implements UsersServiceImpl {
     @Override
     @Transactional
     public int update(AddqqbEntity qqb) {
-        int flag =  usersDao.update(qqb.getNumber());
+        int flag =  usersDao.update(qqb.getNumber(),qqb.getUserid());
         if(flag==0){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return flag;
         }else{
             QQBDao.save(qqb);
@@ -39,5 +42,15 @@ public class UsersService implements UsersServiceImpl {
     public UsersEntity findUser(Integer id) {
         UsersEntity one = usersDao.getOne(id);
         return one;
+    }
+
+    @Override
+    public List<AddqqbEntity> findAllByUserid(Integer userid) {
+        return QQBDao.findAllByUserid(userid);
+    }
+
+    @Override
+    public int updateqqb(Integer qqb, Integer userid) {
+        return usersDao.update(qqb,userid);
     }
 }

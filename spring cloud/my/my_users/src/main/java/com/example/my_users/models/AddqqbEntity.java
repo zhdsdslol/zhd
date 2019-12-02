@@ -1,5 +1,7 @@
 package com.example.my_users.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class AddqqbEntity {
     private int number;
     private String type;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp addtime;
     private int userid;
     private int id;

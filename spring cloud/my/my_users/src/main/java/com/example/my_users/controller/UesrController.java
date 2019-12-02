@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -33,7 +35,31 @@ public class UesrController extends  BaseController{
         return response;
     }
 
+    @RequestMapping("/updateuserfororder")
+    public ResultData updateuserfororder(Integer qqb,Integer userid){
+        int updateqqb = usersService.updateqqb(qqb, userid);
+        if(updateqqb>0){
+            return super.Success(null);
+        }
+        return  super.result(false,"扣除qqb失败",null);
+    }
+    /**
+     * 获取收益记录
+     * @param userid
+     * @return
+     */
+    @RequestMapping("/addqqb")
+    public ResultData addqqb(Integer userid){
+        List<AddqqbEntity> allByUserid = usersService.findAllByUserid(userid);
+        return super.Success(allByUserid);
+    }
 
+    /**
+     * 验证登录信息
+     * @param request
+     * @param id
+     * @return
+     */
     @RequestMapping("/finduser")
     public ResultData finduser(HttpServletRequest request,Integer  id){
         user user = usersService.findUser(id);
@@ -47,6 +73,7 @@ public class UesrController extends  BaseController{
      */
     @RequestMapping("/updateqqb")
     public ResultData updateqqb(AddqqbEntity qqb){
+        qqb.setAddtime(new Timestamp(System.currentTimeMillis()));
         int update = usersService.update(qqb);
         if(update==0){
             return super.result(false,"球球币更新失败了！",qqb);

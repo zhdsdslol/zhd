@@ -18,7 +18,7 @@
 		</view>
 		<view class="cu-bar bg-white margin-top">
 			<view class="action">
-				选择封面
+				选择封面(jpg/jpeg格式不能大于1MB)
 			</view>
 			<view class="action">
 				{{imgList.length}}/1
@@ -38,7 +38,7 @@
 			</view>
 		</view>
 		<view class="cu-form-group margin-top" @click="videoAdd">
-			<view class="title">上传文件</view>
+			<view class="title">上传文件(mp4格式不能大于1MB)</view>
 				<view class="picker">
 					<text>{{video==null?'选择视频文件 >':('文件大小:'+size+'MB')}}</text>
 				</view>

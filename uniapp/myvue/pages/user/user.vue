@@ -15,9 +15,7 @@
 			<view style="justify-content:center;display:flex;">
 				<text style="color: #FFFFFF;">当前时间:{{this.gettime}}</text>
 			</view>
-			
 		</view>
-		
 		<view class="cu-list menu card-menu margin-top" >
 			<view class="cu-item" >
 				<view class="content">
@@ -27,6 +25,34 @@
 				<view class="action">
 					<button class="cu-btn round bg-green shadow" @click="upmovie" style="background: #0081FF;">
 						<text class="cuIcon-upload" ></text> 点击上传</button>
+				</view>
+			</view>
+			<view class="cu-item" >
+				<view class="content">
+					<text class="cuIcon-shop text-red"></text>
+					<text class="text-grey">商品</text>
+				</view>
+				<view class="action">
+					<button class="cu-btn round bg-red shadow" @click="addshop" style="background: #e54d42;">
+						<text class="cuIcon-upload" ></text> 添加商品</button>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="getqqb">
+				<view class="content ">
+					<text class="cuIcon-moneybag text-blue"></text>
+					<text class="text-grey">球球币收益记录</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" @click="orders">
+				<view class="content ">
+					<text class="cuIcon-moneybagfill text-red" ></text>
+					<text class="text-grey">订单记录</text>
+				</view>
+			</view>
+			<view class="cu-item arrow" >
+				<view class="content ">
+					<text class="cuIcon-addressbook text-black"></text>
+					<text class="text-grey">更多功能待续...</text>
 				</view>
 			</view>
 		</view>
@@ -50,9 +76,16 @@
 			 this.hello();
 		},
 		onShow() {
+			
 			this.islogin();
 		},
 		methods:{
+			orders(){
+				uni.navigateTo({url:'../user/orders'});
+			},
+			getqqb(){
+				uni.navigateTo({url:'../user/addqqb'});
+			},
 			logout(){
 				uni.setStorage({
 					key:"user",data:null,success() {
@@ -109,6 +142,9 @@
 			},
 			upmovie:function(){
 				uni.navigateTo({url:'../movies/movieup'});
+			},
+			addshop:function(){
+				uni.navigateTo({url:'../shop/addshop'});
 			},
 			getTime:function(){
 			      let yy = new Date().getFullYear();

@@ -66,6 +66,30 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- Docker maven plugin -->
+            <!--<plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    &lt;!&ndash; docker私服的地址 &ndash;&gt;
+                    <dockerHost>http://49.235.54.66:2375</dockerHost>
+                    &lt;!&ndash;镜像名称以及版本号&ndash;&gt;
+                    <imageName>boot9001</imageName>
+                    &lt;!&ndash;依赖的基础镜像&ndash;&gt;
+                    <baseImage>java</baseImage>
+                    &lt;!&ndash;Dockerfile的位置 &ndash;&gt;
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    &lt;!&ndash; 这里是复制 jar 包到 docker 容器指定目录配置 &ndash;&gt;
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>-->
+            <!-- Docker maven plugin -->
         </plugins>
     </build>
 

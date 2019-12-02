@@ -1,6 +1,8 @@
 package com.example.my_movies.controller;
 
 
+import com.example.my_movies.help.RedisUtils;
+import com.example.my_movies.models.DianzanEntity;
 import com.example.my_movies.models.MoviesEntity;
 import com.example.my_movies.models.ResultData;
 import com.example.my_movies.service.MovieServiceImpl;
@@ -43,6 +45,8 @@ public class MovieController extends  BaseController{
     private RestTemplate restTemplate;
     @Autowired
     private MovieServiceImpl movieService;
+    @Autowired
+    private RedisUtils redisUtils;
 
     /**
      * @return 测试用
@@ -61,6 +65,60 @@ public class MovieController extends  BaseController{
         return "user调用movie成功！";
     }
 
+
+    /**
+     * 点赞
+     * @param userid
+     * @param movieid
+     * @return
+     */
+    @RequestMapping("/dianzan")
+    public ResultData dianzan(Integer userid,Integer movieid){
+        if(userid==null||userid==0||movieid==null||movieid==0){
+            return super.result(false,"点赞失败！",null);
+        }
+        movieService.dianzan(null,movieid,null);
+        String s = redisUtils.get(userid + "");
+        if(isnull(s)){
+            redisUtils.set(userid + "",movieid+",");
+            return super.Success(movieid);
+        }
+        if(s.split(",").length>=1){
+            movieService.dianzan(userid, null, s);
+            redisUtils.delete(userid+"");
+            return super.Success(movieid);
+        }
+        redisUtils.set(userid + "",s+movieid+",");
+        return super.Success(movieid);
+    }
+
+    /**
+     * 查询是否点赞
+     * @param userid
+     * @param movieid
+     * @return
+     */
+    @RequestMapping("/havedianzan")
+    public ResultData havedianzan(Integer userid,Integer movieid){
+        DianzanEntity finddianzan = null;
+        finddianzan = movieService.finddianzan(userid);
+        String movieids="";
+        if(finddianzan!=null&&!isnull(finddianzan.getMovieid())){
+             movieids = finddianzan.getMovieid();
+        }
+        movieids = redisUtils.get(userid + "")+movieids;
+        System.out.println(movieids);
+        if(isnull(movieids)){
+            return super.result(false,"可以点赞",null);
+        }
+        String[] split = movieids.split(",");
+        for (String s : split) {
+            if(s.equals(movieid+"")){
+                return super.result(true,"已点赞！",null);
+            }
+        }
+        return super.result(false,"可以点赞",null);
+    }
 
     /**
      * 获取视频信息
@@ -147,6 +205,7 @@ public class MovieController extends  BaseController{
             File upfile = new File(file,filename);*/
             //将接收的到的 multipartFile 类型的文件 转为 file
             File file = new File(ClassUtils.getDefaultClassLoader().getResource("").getPath()+"\\files");
+            System.out.println(ClassUtils.getDefaultClassLoader().getResource("").getPath());
             if(!file.exists()){
                 file.mkdir();
             }

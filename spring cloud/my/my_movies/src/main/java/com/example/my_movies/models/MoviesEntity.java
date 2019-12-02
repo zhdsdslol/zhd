@@ -22,6 +22,7 @@ public class MoviesEntity {
     private Timestamp addtime;
     private String time;
     private String type;
+    private String title;
 
     @Basic
     @Column(name = "name")
@@ -165,5 +166,15 @@ public class MoviesEntity {
     @Override
     public int hashCode() {
         return Objects.hash(name, id, url, image, userid, username, talk, dianzan, see, addtime, time, type);
+    }
+
+    @Basic
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

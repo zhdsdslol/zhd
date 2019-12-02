@@ -1,7 +1,10 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:9001/eureka/, http://localhost:9000/eureka/
+      defaultZone: http://localhost:9001/eureka/
+  instance:
+    instance-id:  movies #显示此名字(默认是当前项目http://localhost:8001)
+    prefer-ip-address: true #访问路径可以显示ip地址
 server:
   port: 9002
 logging:
@@ -9,9 +12,29 @@ logging:
 spring:
   application:
     name: server-movies
+  #redis配置
+  #Redis服务器地址
+  redis:
+    host: 49.235.54.66
+    #Redis服务器连接端口
+    port: 6379
+    #Redis数据库索引（默认为0）
+    database: 0
+    #连接超时时间（毫秒）
+    timeout: 5000
+    #连接池最大连接数（使用负值表示没有限制）
+    jedis:
+      pool:
+        max-active: 50
+        #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 3000
+        #连接池中的最大空闲连接
+        max-idle: 20
+        #连接池中的最小空闲连接
+        min-idle: 2
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/my?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://49.235.54.66:3306/my?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 6301664
     platform: mysql
@@ -47,5 +70,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   servlet:
     multipart:
-      max-file-size: -1
-      max-request-size: -1
+      max-file-size: 20MB
+      max-request-size: 20MB

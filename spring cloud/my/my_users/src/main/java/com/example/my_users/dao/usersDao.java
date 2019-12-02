@@ -15,6 +15,8 @@ public interface usersDao extends JpaRepository<UsersEntity, Integer> {
 
     @Modifying
     @Transactional
-    @Query(nativeQuery = true,value = " update users set qqb = qqb+?1 ")
-    int update(Integer qqb);
+    @Query(nativeQuery = true,value = " update users set qqb = qqb+?1 where id = ?2")
+    int update(Integer qqb,Integer id);
+
+
 }

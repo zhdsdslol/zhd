@@ -34,6 +34,19 @@ public class RedisUtils {
         }
         return result;
     }
+    /**
+     * 写入缓存
+     */
+    public boolean set(final String key, String value) {
+        boolean result = false;
+        try {
+            redisTemplate.opsForValue().set(key, value);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * 更新缓存

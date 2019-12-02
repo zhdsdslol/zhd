@@ -3,14 +3,14 @@ server:
 spring:
   servlet:
     multipart:
-      max-file-size: -1
-      max-request-size: -1
+      max-file-size: 20MB
+      max-request-size: 20MB
   application:
     name: server-zuul
 #redis配置
 #Redis服务器地址
   redis:
-    host: 127.0.0.1
+    host: 49.235.54.66
     #Redis服务器连接端口
     port: 6379
     #Redis数据库索引（默认为0）
@@ -30,7 +30,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:9001/eureka/, http://localhost:9000/eureka/
+      defaultZone: http://localhost:9001/eureka/
     register-with-eureka: true
     fetch-registry: true
 zuul:
@@ -41,6 +41,9 @@ zuul:
     users:
       serviceId: server-users
       path: /users/**
+    shop:
+      serviceId: server-shop
+      path: /shops/**
 
 
   #需要忽略的头部信息，不在传播到其他服务
